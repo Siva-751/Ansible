@@ -16,30 +16,8 @@ Ansible
    Configuration management tools: Ansible, puppet, cheff 
 
 
-
-
-
-
-
-
-
-
 NOTE:
 By using configuration management tools , We can configure “N” number of servers using single machine [configuration server]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -55,42 +33,12 @@ Introduction
    Ansible was written in Python.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 Configuration can be any task which we can perform on servers (hosts). It can be
 
 1)  Install/Update/Uninstalling software (packages)
 2)  Copy files. Changing the permissions on the files or directories.
 3)  Start/Stop/ Restart the services
 4)  Creating / deleting the users..........
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -101,14 +49,6 @@ Various Configuration Management Tools
 •   Chef
 •   Puppet
 •   Salt Stack
-
-
-
-
-
-
-
-
 
 
 Ansible Features
@@ -128,17 +68,6 @@ Agents on the server periodically checks for the configuration information from 
 
 Ansible is push based.
 Central server pushes the configuration information on target servers. You control when the changes are made on the servers.
-
-
-
-
-
-
-
-
-
-
-
 
 
 Ansible Architecture
@@ -173,22 +102,10 @@ Some important points in Inventory file.
 192.168.122.3
 kkdevops.com
 
-
-
-
 [dbservers]
 192.168.122.4
 192.168.122.5
 192.168.122.2
-
-
-
-
-
-
-
-
-
 
 --> We have two types of inventories
 
@@ -196,25 +113,14 @@ kkdevops.com
 -------------------
 It is a file in the ansible server. It contains the host machine details, Whenever we want to add/remove server information we have to update the static inventory file manually.
 
-
-
 2. dynamic inventory
 --------------------
 
-
 NOTE: default inventory path: /etc/ansible/hosts
-
-
-
-
-
-
 
 PlayBooks
 ==========
-
 -> An Ansible playbook is a YAML file that defines a set of tasks to be executed on one or more  hosts. 
-
 
 Key Components of a Playbook
 ----------------------------
@@ -267,11 +173,7 @@ custom modules
 
 we can implement our own modules using the python, But thousands of predefined modules are available.
 
-
-
-
 =====================================================
-
 
 Ansible installation
 ====================
@@ -398,55 +300,11 @@ ansible all -a "java --version"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ansible all -b -m yum -a "name=httpd state=present" --> Install httpd package in all node.
 
 ansible all -b -m yum -a "name=httpd state=latest" --> to update the httpd packages
 
 ansible all -b -m yum -a "name=httpd state=absent" --> to remove httpd package
-
-
-
-
-
 
 
 
@@ -461,15 +319,6 @@ ansible all -b -m command -a "systemctl status httpd"
 ansible all -b -m service -a "name=httpd state=restarted"
 
 ansible all -b -m service -a "name=httpd state=stopped"
-
-
-
-
-
-
-
-
-
 
 ===================================================
 
@@ -516,9 +365,6 @@ Example
   - name: pinging the host machines
     ping:
 ...
-
-
-
 
 
 How to run a playbook?
@@ -697,21 +543,6 @@ IQ] if i defined variables in plabook and vars.yaml which one will take?
   runtime variables(-e) > variables in a file > playbook variables
 
 
-
-
-
-
-
-
-
-
-
-
-  
-
- 
-
-
 =====================================
 
 debug module in ansible
@@ -832,36 +663,6 @@ with handlers
 
 ===============
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Loops in ansible
 =================
 
@@ -915,16 +716,6 @@ approach 1:
         - vim
         - unzip
         - tree
-
-
-
-
-
-
-
-
-
-
 
 
  approach 2:
@@ -989,16 +780,8 @@ Assignment
 
 
 
-
-
-
-
-
-
 when condition in ansible
 ==========================
-
-
 
 In Ansible, you can use the when condition to control whether a task should be executed based on a specific condition.
 
@@ -1038,12 +821,6 @@ ansible all -m setup
         enabled: yes
       when: ansible_distribution == "RedHat"
 
-
-
-
-
-
-
 ---
 - name: Install HTTP server conditionally for Ubuntu and Red Hat
   hosts: all
@@ -1070,9 +847,6 @@ tags in anisble
 ===============
 
 In Ansible, a tag is a label that you can assign to tasks, plays, or roles in your playbook. Tags allow you to selectively run specific parts of your playbook without executing the entire playbook. This can be especially useful for larger playbooks where you may want to test or apply only certain tasks.
-
-
-
 
 ---
 - name: Install and configure Apache HTTP server
@@ -1109,11 +883,6 @@ ansible-playbook your_playbook.yml --tags "deploy"  --> to run the playbook
 
 
 ansible-playbook manage_web_server.yml --skip-tags start  --> to skip the particular task.
-
-
-
-
-
 
 
 roles in ansible
@@ -1296,12 +1065,6 @@ apache_server_name: "Custom Apache Server"
 - Modularity: The role is now modular and can be reused across multiple playbooks.
 - Customizability: You can customize the Apache server name, package name, and other variables by modifying `vars/main.yml` or the `vars.yaml` file.
 - Template: The `index.html` template allows for dynamic content generation based on Ansible facts or variables. For example, `{{ ansible_hostname }}` can be used to display the host’s name in the web page.
-
-
-
-
-
-
 
 
 
